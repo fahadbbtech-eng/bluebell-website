@@ -1,0 +1,419 @@
+:root{
+  --brand:#083049;
+  --accent:#ffd21f;
+  --muted:#6b7280;
+  --card-border:#e6eef5;
+}
+
+/* Base reset + fonts */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,Helvetica,sans-serif}
+body{background:#f8fafc;color:var(--brand);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* Layout container */
+.container{max-width:1100px;margin:0 auto;padding:18px}
+
+/* Header */
+.header{background:var(--brand);padding:12px 0}
+
+/* Hero: common styles */
+.hero{
+  padding:60px 0;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  z-index:0;
+}
+
+/* Distinguish home vs other pages */
+.hero.home-hero{min-height:900px}   /* Desktop home */
+.hero.page-hero{min-height:600px}   /* Desktop other pages */
+
+/* Cards / Panels (legacy) */
+.cards{display:flex;gap:16px;flex-wrap:wrap}
+.card{background:#fff;padding:14px;border-radius:8px;border:1px solid var(--card-border);flex:1;min-width:220px}
+
+/* Buttons */
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;background:var(--accent);color:var(--brand);font-weight:700}
+
+/* Footer */
+.footer{background:#0b2b3b;color:#fff;padding:18px;margin-top:24px;text-align:center}
+
+/* Footer bottom layout fix (keeps footer at bottom if content short) */
+html, body {height:100%}
+body {display:flex;flex-direction:column;min-height:100vh}
+.site-main {flex:1 0 auto}
+.footer {margin-top:auto}
+
+/* Services grid & card styles */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.service-card {
+  background: #fff;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(12,44,68,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.service-card h3 {
+  margin: 6px 0 8px;
+  color: var(--brand);
+  font-size: 18px;
+}
+
+.service-card p.lead {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  transition: transform 180ms ease;
+}
+
+/* Mobile tweaks for services */
+@media (max-width: 767px) {
+  .service-card { padding: 14px; }
+  .service-icon { width: 40px; height: 40px; margin-bottom: 10px; }
+}
+
+/* Responsive hero sizing */
+/* Tablet */
+@media (max-width:1199px){
+  .hero.home-hero{min-height:600px}
+  .hero.page-hero{min-height:400px}
+  .hero{padding:48px 0}
+  .container{padding:16px}
+}
+
+/* Mobile */
+@media (max-width:767px){
+  .hero.home-hero{min-height:400px}
+  .hero.page-hero{min-height:300px}
+  .hero{padding:28px 0}
+  .container{padding:12px}
+  .card{min-width:100%}
+  .header .container{padding-left:12px;padding-right:12px}
+  .hero .container .content h1{font-size:22px;line-height:1.1}
+  .hero .container .content p{font-size:14px}
+}
+
+/* WhatsApp floating icon */
+.whatsapp-btn img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+
+/* Small tweak: ensure text contrast over image */
+.hero .container .content h1{margin-bottom:8px}
+.hero .container .content p{margin-bottom:6px;color:#f1f5f9}
+
+/* Utility */
+a{color:inherit}
+
+/* ===== Mobile-friendly hero overrides (paste at bottom of custom.css) ===== */
+
+/* Subtle dark overlay so text reads reliably on all phones */
+.hero::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.32);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure hero content sits above the overlay */
+.hero .container.content,
+.hero .container .content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reduce heights and spacing on small screens to avoid large blank areas */
+@media (max-width: 767px) {
+  .hero.home-hero { min-height: 260px !important; }   /* was 400px */
+  .hero.page-hero { min-height: 180px !important; }   /* was 300px */
+  .hero { padding: 18px 0 !important; }
+
+  /* Container padding so content doesn't touch edges */
+  .hero .container { padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* Force smaller heading & paragraph sizes (overrides inline styles) */
+  .hero .container .content h1,
+  .hero .container .content h1[style] {
+    font-size: 20px !important;
+    line-height: 1.12 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hero .container .content p,
+  .hero .container .content p[style] {
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .hero .container .content .subtitle,
+  .hero .container .content .subtitle[style] {
+    font-size: 13px !important;
+    font-weight:700 !important;
+    margin-top:4px !important;
+  }
+}
+
+/* Small screens a bit larger (tablet) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hero.home-hero { min-height: 560px !important; } /* smaller than desktop */
+  .hero.page-hero { min-height: 360px !important; }
+  .hero { padding: 34px 0 !important; }
+}
+
+/* Safety: ensure background covers container even if image loads slowly */
+.hero {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #083049; /* fallback while image loads */
+}
+
+/* Mobile navigation toggle button */
+.mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* Base styles for the mobile menu */
+.header nav.is-open {
+    display: block !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--brand);
+    text-align: center;
+    padding: 12px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header nav.is-open ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Media query to apply mobile-specific styles */
+@media (max-width: 767px) {
+    /* Hide the desktop navigation menu */
+    .header nav {
+        display: none !important;
+    }
+
+    /* Show the mobile menu toggle button */
+    .mobile-menu-toggle {
+        display: block;
+    }
+}
+
+.contact-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.contact-layout .contact-form,
+.contact-layout .map-container {
+  flex: 1 1 450px; /* Use flex-basis to control sizing on desktop */
+}
+
+/* Set a fixed height for the map container */
+.map-container iframe {
+    height: 500px; /* Adjust this value as needed */
+    width: 100%;
+}
+
+/* Media query for mobile to stack items vertically */
+@media (max-width: 767px) {
+  .contact-layout {
+    flex-direction: column;
+  }
+}
+
+.hero .content {
+    text-align: left;
+    padding: 20px 0;
+}
+
+@media (max-width: 767px) {
+    .hero .content {
+        text-align: center;
+    }
+}
+
+/* =========================
+   Hero alignment & spacing
+   ========================= */
+
+/* Home hero: centered with extra bottom padding */
+.hero.home-hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.hero.home-hero .content {
+  padding: 100px 20px 140px; /* top | sides | bottom */
+  text-align: left;
+}
+.hero.home-hero .subtitle {
+  display: block;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.hero.home-hero .hero-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero.home-hero .hero-buttons a {
+  margin: 0;
+}
+
+/* Other pages: align bottom-left */
+.hero.page-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.hero.page-hero .content {
+  padding: 40px 20px 60px;
+  text-align: left;
+}
+
+/* Heading sizes (Home = big, Others = slightly smaller) */
+.hero.home-hero h1 {
+  font-size: 40px;
+  line-height: 1.05;
+}
+.hero.page-hero h1 {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .hero .content {
+    text-align: center;
+    padding: 60px 16px;
+  }
+  .hero.home-hero {
+    align-items: center;
+    justify-content: center;
+  }
+  .hero.home-hero .hero-buttons {
+    justify-content: center;
+  }
+  .hero.home-hero h1,
+  .hero.page-hero h1 {
+    font-size: 26px;
+    line-height: 1.1;
+  }
+}
+
+/* =========================
+   FORCE: Hero alignment & spacing (final)
+   Paste at very end of custom.css
+   ========================= */
+
+/* Home hero: centered with extra bottom padding */
+section.hero.home-hero,
+.hero.home-hero {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+.hero.home-hero .content,
+section.hero.home-hero .content {
+  padding: 100px 20px 140px !important; /* top | sides | bottom */
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.hero.home-hero .subtitle { display:block !important; margin-bottom:20px !important; font-weight:700 !important; }
+.hero.home-hero .hero-buttons { margin-top:10px !important; display:flex !important; gap:12px !important; flex-wrap:wrap !important; align-items:center !important; }
+.hero.home-hero .hero-buttons a { margin:0 !important; white-space:nowrap !important; }
+
+/* Other pages: align bottom-left (force) */
+section.hero.page-hero,
+.hero.page-hero {
+  display: flex !important;
+  align-items: flex-end !important;   /* push content to bottom */
+  justify-content: flex-start !important;
+}
+.hero.page-hero .content,
+section.hero.page-hero .content {
+  padding: 40px 20px 60px !important;
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+/* Force heading sizes */
+.hero.home-hero h1, section.hero.home-hero h1 { font-size:40px !important; line-height:1.05 !important; margin:0 0 12px 0 !important; }
+.hero.page-hero h1, section.hero.page-hero h1 { font-size:30px !important; line-height:1.15 !important; margin:0 0 8px 0 !important; }
+
+/* Responsive adjustments (force on mobile) */
+@media (max-width: 767px) {
+  .hero .content,
+  section.hero .content {
+    text-align: center !important;
+    padding: 60px 16px !important;
+  }
+  .hero.home-hero { align-items: center !important; justify-content: center !important; }
+  .hero.home-hero .hero-buttons { justify-content: center !important; }
+  .hero.home-hero h1, .hero.page-hero h1 { font-size:26px !important; line-height:1.1 !important; }
+}
+
+/* ===== Logo adjustments ===== */
+.header img {
+  height: 64px;   /* scales logo to fit header nicely */
+  width: auto;    /* keeps correct proportions */
+}
+
+.header .container a {
+  gap: 6px;       /* reduces space between logo and company name */
+}
+
